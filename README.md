@@ -59,7 +59,7 @@ return top 5 year with highest avg content release!
 the description field. Label content containing these keywords as 'Bad' and all other 
 content as 'Good'. Count how many items fall into each category.
 
-### 1. Count the number of Movies vs TV Shows
+#### 1. Count the number of Movies vs TV Shows
 ``` SQL
 SELECT 
 	type,
@@ -68,7 +68,7 @@ FROM netflix
 GROUP BY type;
 ```
 
-### 2. Find the most common rating for movies and TV shows
+#### 2. Find the most common rating for movies and TV shows
 ``` SQL
 SELECT 
 	type,
@@ -86,7 +86,7 @@ FROM (
 WHERE rw = 1;
 ```
 
-### 3. List all movies released in a specific year (e.g., 2020)
+#### 3. List all movies released in a specific year (e.g., 2020)
 ``` SQL
 SELECT 
 	title
@@ -94,7 +94,7 @@ FROM netflix
 WHERE release_year = 2020;
 ```
 
-### 4. Find the top 5 countries with the most content on Netflix
+#$## 4. Find the top 5 countries with the most content on Netflix
 ``` SQL
 SELECT
 	TRIM(UNNEST(STRING_TO_ARRAY(country,','))) as country,
@@ -105,7 +105,7 @@ ORDER BY COUNT(*) DESC
 LIMIT 5;
 ```
 
-### 5. Identify the longest movie
+#### 5. Identify the longest movie
 ``` SQL
 SELECT
 	title,
@@ -120,7 +120,7 @@ WHERE type = 'Movie'
 					);
 ```
 
-### 6. Find content added in the last 5 years
+#### 6. Find content added in the last 5 years
 ``` SQL
 SELECT
 	title
@@ -135,7 +135,7 @@ WHERE date_part('year',date_added) in(
 				);
 ```
 
-### 7. Find all the movies/TV shows by director 'Rajiv Chilaka'!
+#### 7. Find all the movies/TV shows by director 'Rajiv Chilaka'!
 ``` SQL
 SELECT 
 	*
@@ -143,7 +143,7 @@ FROM netflix
 WHERE director = 'Rajiv Chilaka';
 ```
 
-### 8. List all TV shows with more than 5 seasons
+#### 8. List all TV shows with more than 5 seasons
 ``` SQL
 SELECT
 	title,
@@ -153,7 +153,7 @@ WHERE type = 'TV Show' AND left(duration,1)::int  > 5
 ORDER BY duration;
 ```
 
-### 9. Count the number of content items in each genre
+#### 9. Count the number of content items in each genre
 ``` SQl
 SELECT
 	TRIM(UNNEST(STRING_TO_ARRAY(listed_in,','))) as genre,
@@ -163,7 +163,7 @@ GROUP BY TRIM(UNNEST(STRING_TO_ARRAY(listed_in,',')))
 ORDER BY total_content DESC;
 ```
 
-### 10.Find each year and the average numbers of content release in India on netflix.
+#### 10.Find each year and the average numbers of content release in India on netflix.
 return top 5 year with highest avg content release!
 
 ``` SQL	
@@ -178,7 +178,7 @@ ORDER BY avg_content DESC
 LIMIT 5;
 ```
 
-### 11. List all movies that are documentaries
+#### 11. List all movies that are documentaries
 
 ``` SQL
 SELECT
@@ -187,7 +187,7 @@ FROM netflix
 WHERE listed_in = 'Documentaries';
 ```
 
-### 12. Find all content without a director
+#### 12. Find all content without a director
 ``` SQL
 SELECT 
 	title
@@ -195,7 +195,7 @@ FROM netflix
 WHERE director is null;
 ```
 
-### 13. Find how many movies actor 'Salman Khan' appeared in last 10 years!
+#### 13. Find how many movies actor 'Salman Khan' appeared in last 10 years!
 ``` SQL
 SELECT 
 	title,casts
@@ -212,7 +212,7 @@ WHERE casts like '%Salman Khan%'
 ```
 
 
-### 14. Find the top 10 actors who have appeared in the highest number of movies produced in India.
+#### 14. Find the top 10 actors who have appeared in the highest number of movies produced in India.
 ``` SQL
 WITH CTE AS (
 	SELECT
@@ -234,7 +234,7 @@ ORDER BY Total_apperance DESC
 LIMIT 10;
 ```
 	
-### 15. Categorize the content based on the presence of the keywords 'kill' and 'violence' in the description field. Label content containing these keywords as 'Bad' and all other content as 'Good'. Count how many items fall into each category.
+#### 15. Categorize the content based on the presence of the keywords 'kill' and 'violence' in the description field. Label content containing these keywords as 'Bad' and all other content as 'Good'. Count how many items fall into each category.
 ``` SQL
 SELECT 
 	category,
