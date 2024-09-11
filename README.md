@@ -105,8 +105,8 @@ ORDER BY COUNT(*) DESC
 LIMIT 5;
 ```
 
-5. Identify the longest movie
-
+### 5. Identify the longest movie
+``` SQL
 SELECT
 	title,
 	duration
@@ -118,9 +118,10 @@ WHERE type = 'Movie'
 										FROM netflix
 										WHERE type = 'Movie'
 										);
+```
 
-6. Find content added in the last 5 years
-
+### 6. Find content added in the last 5 years
+``` SQL
 SELECT
 	title
 FROM netflix
@@ -132,35 +133,40 @@ WHERE date_part('year',date_added) in(
 									ORDER BY date_part('year',date_added) DESC
 									LIMIT 5
 									);
+```
 
-7. Find all the movies/TV shows by director 'Rajiv Chilaka'!
-
+### 7. Find all the movies/TV shows by director 'Rajiv Chilaka'!
+``` SQL
 SELECT 
 	*
 FROM netflix
 WHERE director = 'Rajiv Chilaka';
+```
 
-8. List all TV shows with more than 5 seasons
-
+### 8. List all TV shows with more than 5 seasons
+``` SQL
 SELECT
 	title,
 	duration
 FROM netflix
 WHERE type = 'TV Show' AND left(duration,1)::int  > 5
 ORDER BY duration;
+```
 
-9. Count the number of content items in each genre
-
+### 9. Count the number of content items in each genre
+``` SQl
 SELECT
 	TRIM(UNNEST(STRING_TO_ARRAY(listed_in,','))) as genre,
 	COUNT(*) as total_content
 FROM netflix
 GROUP BY TRIM(UNNEST(STRING_TO_ARRAY(listed_in,',')))
 ORDER BY total_content DESC;
+```
 
-10.Find each year and the average numbers of content release in India on netflix.
+### 10.Find each year and the average numbers of content release in India on netflix.
 return top 5 year with highest avg content release!
-	
+
+``` SQL	
 SELECT
 	release_year,
 	COUNT(*) as total_content,
@@ -170,23 +176,27 @@ WHERE country = 'India'
 GROUP BY release_year
 ORDER BY avg_content DESC
 LIMIT 5;
+```
 
-11. List all movies that are documentaries
+### 11. List all movies that are documentaries
 
+``` SQL
 SELECT
 	title
 FROM netflix
 WHERE listed_in = 'Documentaries';
+```
 
-12. Find all content without a director
-
+### 12. Find all content without a director
+``` SQL
 SELECT 
 	title
 FROM netflix 
 WHERE director is null;
+```
 
-13. Find how many movies actor 'Salman Khan' appeared in last 10 years!
-
+### 13. Find how many movies actor 'Salman Khan' appeared in last 10 years!
+``` SQL
 SELECT 
 	title,casts
 FROM netflix 
@@ -198,10 +208,11 @@ WHERE casts like '%Salman Khan%'
 																			ORDER BY date_part('year',date_added) DESC
 																			LIMIT 10
 																			);
+```
 
 
-14. Find the top 10 actors who have appeared in the highest number of movies produced in India.
-
+### 14. Find the top 10 actors who have appeared in the highest number of movies produced in India.
+``` SQL
 WITH CTE AS (
 	SELECT
 		director,
@@ -220,12 +231,13 @@ WHERE director = (SELECT director FROM CTE)
 GROUP BY UNNEST(STRING_TO_ARRAY(casts, ','))
 ORDER BY Total_apperance DESC
 LIMIT 10;
+```
 	
-15.
+### 15.
 Categorize the content based on the presence of the keywords 'kill' and 'violence' in 
 the description field. Label content containing these keywords as 'Bad' and all other 
 content as 'Good'. Count how many items fall into each category.
-
+``` SQL
 SELECT 
 	category,
 	type,
@@ -238,4 +250,5 @@ FROM (
 		END AS category
 	FROM netflix) as a
 GROUP BY category, type;
+```
 
