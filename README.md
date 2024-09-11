@@ -201,13 +201,14 @@ SELECT
 	title,casts
 FROM netflix 
 WHERE casts like '%Salman Khan%'
-	AND date_part('year',date_added) IN (SELECT
-																				DISTINCT date_part('year',date_added)
-																			FROM netflix
-																			WHERE date_part('year',date_added) IS NOT NULL
-																			ORDER BY date_part('year',date_added) DESC
-																			LIMIT 10
-																			);
+	AND date_part('year',date_added) IN (
+					SELECT
+						DISTINCT date_part('year',date_added)
+					FROM netflix
+					WHERE date_part('year',date_added) IS NOT NULL
+					ORDER BY date_part('year',date_added) DESC
+					LIMIT 10
+					);
 ```
 
 
