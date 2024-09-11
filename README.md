@@ -113,11 +113,11 @@ SELECT
 FROM netflix
 WHERE type = 'Movie' 
 	AND REPLACE(duration,'min','')::int = (
-										SELECT
-											MAX(REPLACE(duration,'min','')::int)
-										FROM netflix
-										WHERE type = 'Movie'
-										);
+					SELECT
+						MAX(REPLACE(duration,'min','')::int)
+					FROM netflix
+					WHERE type = 'Movie'
+					);
 ```
 
 ### 6. Find content added in the last 5 years
@@ -126,13 +126,13 @@ SELECT
 	title
 FROM netflix
 WHERE date_part('year',date_added) in(
-									SELECT
-										DISTINCT date_part('year',date_added)
-									FROM netflix
-									WHERE date_part('year',date_added) IS NOT NULL
-									ORDER BY date_part('year',date_added) DESC
-									LIMIT 5
-									);
+				SELECT
+					DISTINCT date_part('year',date_added)
+				FROM netflix
+				WHERE date_part('year',date_added) IS NOT NULL
+				ORDER BY date_part('year',date_added) DESC
+				LIMIT 5
+				);
 ```
 
 ### 7. Find all the movies/TV shows by director 'Rajiv Chilaka'!
